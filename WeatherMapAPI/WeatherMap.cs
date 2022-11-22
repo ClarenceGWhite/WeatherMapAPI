@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using Newtonsoft.Json.Linq;
+
+namespace WeatherMapAPI
+{
+    public class WeatherMap
+    {
+        public static double GetTemp(string apiCall)
+        {
+
+            var client = new HttpClient();
+            var response = client.GetStringAsync(apiCall).Result; 
+            //Console.WriteLine(response);
+            var temp = Convert.ToInt32(double.Parse(JObject.Parse(response)["main"]["temp"].ToString()));
+            
+            return temp;
+            
+        }
+
+    }
+
+}
